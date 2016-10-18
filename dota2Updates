@@ -1,0 +1,41 @@
+import praw
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from time import sleep
+
+def sendMail(subject,body,emailID,password):
+    fromAddr = emailID
+    to = emailID
+    mail = MIMEMultipart()
+    mail['From'] = fromAddr
+    mail['To'] = to
+    mail['Subject'] = subject
+
+    funcBody = body + "\n \n \n \n ----------------------------\n Mail sent using Reddit Bot. \n Contact bloodmage7 on reddit in case of any queries"
+
+    mail.attach(MIMEText(funcBody,'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com',587)
+    server.starttls()
+    server.login(emailID,password)
+    server.sendmail(fromAddr,to,mail.as_string())
+    server.quit()
+    print "Mail has been sent successfully"
+    
+
+
+user_agent = "dota2 Updates (by /u/bloodmage7)"
+
+cache=[]
+emailID = raw_input("Please enter emailID: ");
+password = raw_input("Please enter password: ");
+r = praw.Reddit(user_agent = user_agent)
+while True:
+    subreddit = r.get_subreddit("dota2")
+
+    for posts in subreddit.get_hot():
+        if 'Dota 2 Update' in posts.title and posts.id not in cache:
+            sendMail(posts.title,posts.selftext,emailID,password)
+        cache.append(posts.id)
+    sleep(1200)
