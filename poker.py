@@ -1,12 +1,26 @@
-# -----------
-# User Instructions
-# 
-# Write a function, allmax(iterable, key=None), that returns
-# a list of all items equal to the max of the iterable, 
-# according to the function specified by key. 
+#Trying to emulate the real life Poker Game using Python. Followed Peter Norvig's class and added a few of my own touches.
+
+#List of Things learned because of this assignment:
+
+#1 Python modules are a boon. Complex tasks like shuflfing and Permuation and combination were made easy because of random and itertools module
+#  "Every advance feature that is there in the programming language is because someone suffered in the past." - Peter Norvig    
+
+#2 List comprehensions are neat: mydeck was made effortlessly.
+
+#3 Introduced playernames just for the fun of it. Currenlty limited to 5 names
+
+#4 Max function is great. Specially the way its key argument can be used. Makes things so easy:  maxHand = max(hand_ranks,key=lambda hand_ranks: hand_ranks[:-1])
+
+#5 This: ranks = ['--23456789TJQKA'.index(r) for r, s in hand] is such a great trick. Converting the cards to rank and iterating over a list of strings containing 2 letters
+
+#6 Set: set is a very useful data structure. Can be used to get an unique list of elements from a list.
+
+#7 Define a test function with assert for testing purposes
+
+#8 Zip function is used to combine two lists
 
 
-import random # this will be a useful library for shuffling
+import random   #useful library for shuffling
 
 import itertools #for combination 
 
@@ -17,9 +31,7 @@ playerNames = {1:"James Bond", 2: "Naruto Uzumaki", 3: "Monkey D. Luffy", 4: "Sh
 def best_hand(hand,bestOf):
     "From a 7-card hand, return the best 5 card hand."
     comb = list(itertools.combinations(hand,bestOf))
-    
     return max(comb,key=hand_rank)
-
 
 def poker(hands):
     "Return a list of winning hands: poker([hand,...]) => [hand,...]"
@@ -30,8 +42,7 @@ def allmax(iterable, key=None):
     # Your code here.    
     hand_ranks =[hand_rank(hand) for hand in iterable]
     maxHand = max(hand_ranks,key=lambda hand_ranks: hand_ranks[:-1])
-    return [(hand,maxHand[-1]) for hand in iterable if maxHand == hand_rank(hand)] 
-    
+    return [(hand,maxHand[-1]) for hand in iterable if maxHand == hand_rank(hand)]     
 
 def hand_rank(hand):
     "Return a value indicating the ranking of a hand."
@@ -108,11 +119,9 @@ if __name__ == "__main__":
     cardsEachHand = int(raw_input("Enter number of cards per hand: "))
     bestOf = int(raw_input("Enter best of number of cards per hand: "))
     hands = deal(numberOfPlayers,cardsEachHand)
-    playerHands = {} 
+    playerHands = {}
     for num,hand in zip(random.sample([x for x in range(1,6)],numberOfPlayers),hands):
         playerHands[num] = best_hand(hand,bestOf)
     winners =  poker(playerHands.values())
-    print [ playerNames[name]+ " won with " + winner[-1] for winner in winners for name,hand in playerHands.iteritems() if hand == winner[0] ]
-
-
+    print [ playerNames[name]+ " won with " + winner[-1] +" Hand: (" + str(playerHands[name]) + ") " for winner in winners for name,hand in playerHands.iteritems() if hand == winner[0] ]
 
