@@ -29,13 +29,8 @@ class Node:
             current = next
         self.data = current.data
         self.next = prev
-
-N = int(raw_input("Enter Number of elements: "))
-
-head = Node(int(raw_input("Enter Elements: ")))
-
-
-
+        
+        
 if __name__ == "__main__":
     N = int(raw_input("Enter Number of elements: "))
     head = Node(int(raw_input("Enter Elements: ")))
