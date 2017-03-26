@@ -34,13 +34,11 @@ N = int(raw_input("Enter Number of elements: "))
 
 head = Node(int(raw_input("Enter Elements: ")))
 
-for i in range(1,N):
-    head.insert(int(raw_input()))
-
 
 
 if __name__ == "__main__":
-
+    for i in range(1,N):
+        head.insert(int(raw_input()))
     head.display()
     head.reverse()
     head.display()
