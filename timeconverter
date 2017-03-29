@@ -1,0 +1,21 @@
+# Hacker Rank Problem: https://www.hackerrank.com/challenges/time-conversion
+
+# Regular expression can be used
+
+# Will break if the input string format changes
+
+time = raw_input().strip()
+if time[-2] == 'P':
+    hour = int(time[0:time.find(':')])
+    if(hour != 12):
+        convertedtime = str(hour+12)+time[time.find(':'):-2]
+    else:
+        convertedtime = time[:-2]
+else:
+    hour = int(time[0:time.find(':')])
+    if(hour != 12):
+        convertedtime = time[:-2]
+    else:
+        convertedtime = "00"+time[2:-2]
+
+print convertedtime
