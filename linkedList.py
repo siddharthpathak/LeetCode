@@ -7,40 +7,38 @@ class Node:
         self.data = data
         self.next = None
 
+        
+class linkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self,data):
+        temp = Node(data)
+        temp.next = self.head
+        self.head = temp
+
     def display(self):
-        current = self
+        current = self.head
         while current is not None:
-            print current.data,
+            print current.data
             current = current.next
-
-    def insert(self, data):
-            current = self
-            while current.next is not None:
-                current = current.next
-            current.next = Node(data)
-
     def reverse(self):
-        current = copy.deepcopy(self)
+        current = self.head
         prev = None
-        while current.next is not None:
+        next = None
+        while current is not None:
             next = current.next
             current.next = prev
             prev = current
             current = next
-        self.data = current.data
-        self.next = prev
-        
-        
+        self.head = prev
+       
 if __name__ == "__main__":
-    N = int(raw_input("Enter Number of elements: "))
-    head = Node(int(raw_input("Enter Elements: ")))
-    for i in range(1,N):
-        head.insert(int(raw_input()))
-    head.display()
-    head.reverse()
-    head.display()
-
-
-
-
-
+    linkedlist = linkedList()
+    linkedlist.insert(1)
+    linkedlist.insert(2)
+    linkedlist.insert(3)
+    linkedlist.insert(4)
+    linkedlist.display()
+    linkedlist.reverse()
+    linkedlist.display()
