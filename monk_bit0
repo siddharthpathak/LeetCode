@@ -1,0 +1,25 @@
+# Hackerearth: 
+# https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/practice-problems/algorithm/monks-choice-of-numbers-1/
+
+
+
+T = int(raw_input())
+
+
+while T:
+    S = (raw_input())
+    N,K = map(int,S.split(' '))
+    number = map(int,raw_input().split(' '))
+    countList = []
+    for index,n in enumerate(number):
+        count = 0
+        while n:
+            count +=1
+            n = n & (n-1)
+        countList.append(count)
+    countList.sort(reverse=True)
+    count = 0
+    for i in range(0,K):
+        count += countList[i]
+    print count
+    T -=1
