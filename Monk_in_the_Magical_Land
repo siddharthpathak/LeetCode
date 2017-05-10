@@ -1,0 +1,50 @@
+#Hackearth Problem Link:
+#https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/practice-problems/algorithm/monk-in-the-magical-land/
+
+
+
+
+
+import itertools
+import time
+
+def gcd(a,b):
+    if (a==b):
+        return a
+    elif (a & 1 == 0 and b & 1 == 0):
+        return gcd(a>>1,b>>1) << 1
+    elif (a & 1 == 0):
+        return gcd(a>>1,b)
+    elif (b & 1 == 0):
+        return gcd(a,b>>1)
+    else:
+        if (a > b):
+            return gcd((a-b)/2,b)
+        return gcd(a,(b-a)/2)
+
+
+
+T = int(raw_input())
+
+while T:
+    N,M,K = map(int,raw_input().split(' '))
+    X = map(int,raw_input().split(' '))
+    C = map(int,raw_input().split(' '))
+    Z = map(int,raw_input().split(' '))
+    gem = []
+    chestOpened = []
+    for key in X:
+        for i,chest in enumerate(C):
+            if(gcd(key,chest) > 1):
+                gem.append(i)
+        chestOpened.append(set(gem))
+        del gem[:]
+    max_gem_sum = 0
+    for x in (itertools.combinations(chestOpened,K)):
+        gem_sum = 0
+        for y in set.union(*x):
+            gem_sum += Z[y]
+        if (gem_sum >= max_gem_sum):
+            max_gem_sum = gem_sum
+    print max_gem_sum
+    T -=1
