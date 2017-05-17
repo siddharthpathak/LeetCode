@@ -1,0 +1,18 @@
+#leetcode
+
+# https://leetcode.com/problems/reverse-string-ii/#/description
+
+
+
+def reversestring2(s,k):
+    if (2*k) <= len(s):
+        return s[k-1::-1] + s[k:(2*k)] + reversestring2(s[(2*k):],k)
+    elif ((2*k) > len(s)) and len(s) >= k:
+        return s[k-1::-1] + s[k:]
+    elif (k > len(s)):
+        return s[::-1]
+
+
+
+
+assert reversestring2("abcdef",2)
