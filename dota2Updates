@@ -1,3 +1,9 @@
+# Checks if the Dota 2 subreddit contains any posts related to 'Dota 2 updates' and if it contains then sends out an email to the given mailing list
+
+# Used PRAW for consuming APIs of reddit and SMTPLIB for sending emails
+
+
+
 import praw
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
@@ -5,6 +11,10 @@ from email.MIMEText import MIMEText
 from time import sleep
 
 def sendMail(subject,body,emailID,password):
+    """
+        Sends out email to the string emailID, which contains email ID in a comma seperated manner
+        Also requires login details of the email account from which the mail is sent.
+    """
     fromAddr = emailID
     to = emailID
     mail = MIMEMultipart()
