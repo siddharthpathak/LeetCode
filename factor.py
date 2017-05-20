@@ -1,3 +1,6 @@
+# Just a small Program to demonstrate overloading of 'print' function of class using __str__ and overloading of "+" operator using __add__
+
+
 def gcd(m,n):
     if m%n != 0:
         return gcd(n,m%n)
