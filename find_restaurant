@@ -1,0 +1,18 @@
+#LeetCode: https://leetcode.com/problems/minimum-index-sum-of-two-lists/#/description
+
+
+def findRestaurant(l1,l2):
+    result = []
+    ds1 = {}
+    for i,s in enumerate(l1):
+        ds1[s] = i
+
+    for i,s in enumerate(l2):
+        if ds1.get(s) is not None:
+            result.append((s,i+ds1.get(s)))
+
+    minimum = result[0][1]
+    for i,x in result:
+        if x < minimum:
+            minimum = x
+    return [i for i,x in result if minimum == x]
