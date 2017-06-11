@@ -1,0 +1,15 @@
+#Leetcode: https://leetcode.com/problems/move-zeroes/#/description
+
+
+def moveZeroes(self, nums):
+  zero_count = 0
+  i = 0
+  j = 0
+  while i < len(nums):
+    if (nums[i]) == 0:
+      zero_count += 1
+    else:
+      nums[i - zero_count] = nums[i]            
+      i +=1
+    if zero_count != 0:
+      nums[-zero_count:] = [0]*zero_count       #replaced the array contents with zeroes from zero_count(-) to the end
