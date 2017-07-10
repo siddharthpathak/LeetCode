@@ -1,0 +1,36 @@
+# Program to Solve Bulls and Cows Game
+
+# Things Learned:
+# Always check the datatype which is expected:
+#   If the numbers were int instead of string then loop would have changed as int is not a iterable
+# In dictionary if you add a same key again, then it overrides the previous one
+# Intialising a list in Python cannot be done like an array in C/Java.
+# Test cases is what makes a problem harder to solve. 
+
+
+def getHint(secret,guess):
+    s = {}
+    g = {}
+    c = 0
+    bulls = 0
+    cows = 0
+    for i,x in enumerate(secret):
+        s[i] = x
+    for i,x in enumerate(secret):
+        if g.get(x,None) is not None:     #use get to avoid exception of key not found
+            g[x] = g[x] + 1
+        else:
+            g[x] = 1
+
+    for i,x in enumerate(guess):
+        t = s.get(i,None)
+        if  t == x:
+            bulls += 1
+            g[x] = g[x] - 1
+
+    for i,x in enumerate(guess):
+        if (g.get(x,-1) > 0) and (s.get(i,None) != x):      #additional check to see if its not already counted in Bull
+            cows += 1
+            g[x] = g[x] - 1
+
+    return str(bulls) + "A" + str(cows) + "B"
