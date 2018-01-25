@@ -1,0 +1,16 @@
+https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/
+
+def nextGreatestLetter(self, letters, target):
+        """
+        :type letters: List[str]
+        :type target: str
+        :rtype: str
+        """
+        res = [999,'']
+        for l in letters:
+            if (ord(l) - ord (target)) <= res[0] and (ord(l) - ord (target)) > 0:
+                res[1] = l
+                res[0] = (ord(l) - ord (target))
+        if ord(letters[-1]) <= ord(target):
+            res[1] = letters[0]
+        return res[1]
