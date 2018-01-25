@@ -1,2 +1,2 @@
 # Python
-Some Python practice programs
+Some Python utilities, and some practice programs.
