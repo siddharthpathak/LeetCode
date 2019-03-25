@@ -1,2 +1,1 @@
-# Python
-Some Python utilities, and some practice programs.
+Some Python utilities, and some Leetcode.
